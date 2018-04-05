@@ -1,16 +1,16 @@
 define("js/counterfunctions", function () {
     "use strict";
     return {
-        up: function (inject, name, value) {
+        up: function (inject, name, prev, value) {
             return function () {
                 var obj = {};
-                obj[name] = value + 1;
+                obj[name] = prev[name] + value;
                 inject(obj);
             };
-        }, down: function (inject, name, value) {
+        }, down: function (inject, name, prev, value) {
             return function () {
                 var obj = {};
-                obj[name] = value - 1;
+                obj[name] = prev[name] - value;
                 inject(obj);
             };
         }

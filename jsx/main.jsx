@@ -10,9 +10,9 @@ define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
                     return (<div>
                         <h1>Counters</h1>
                         <p>First</p>
-                        <Counter name="first" value={state.pageData.first} inject={actions.inject} />
+                        <Counter name="first" value={1} inject={actions.inject} prev={state.pageData} />
                         <p>Second</p>
-                        <Counter name="second" value={state.pageData.second} inject={actions.inject} />
+                        <Counter name="second" value={1} inject={actions.inject} prev={state.pageData} />
                     </div>);
                 }
             });
