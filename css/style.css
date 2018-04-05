@@ -11,6 +11,9 @@ body,input,button,select{
     border:2px solid;
     padding: .5em 1em
 }
+.btn:hover,.btn:focus,.btn:active{
+    background: rgba(0,0,0,.1)
+}
 .counterBtn{
     height: 1.6em;
     width:1.6em;
