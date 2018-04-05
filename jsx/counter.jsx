@@ -8,11 +8,11 @@ define("build/counter", [
         var inject = props.inject,
             name = props.name,
             pageData = props.pageData,
-            value = props.value;
+            by = props.by;
         return (<p>
-            <button class="btn counterBtn" type="button" $click={fns.down(inject, name, pageData, value)}>&minus;</button>
+            <button class="btn counterBtn" type="button" $click={fns.down(inject, name, pageData, by)}>&minus;</button>
             <span class="counterValue">{pageData[name]}</span>
-            <button class="btn counterBtn" type="button" $click={fns.up(inject, name, pageData, value)}>+</button>
+            <button class="btn counterBtn" type="button" $click={fns.up(inject, name, pageData, by)}>+</button>
         </p>);
     };
 });
