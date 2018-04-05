@@ -23,7 +23,7 @@ define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
         currentView: function (state, actions) {
             return (<p>
                 <button type="button" class="btn" $click={function () {
-                    loadCounter(actions.globalInject)
+                    loadCounter(actions.globalInject);
                 }}>Show counters</button>
             </p>);
         }
