@@ -1,5 +1,6 @@
 # countertest
 Counters in HyperApp.
 
-##Screenshot
-![image](https://raw.githubusercontent.com/infinnie/countertest/image.png)
+## Screenshot
+
+![image](https://github.com/infinnie/countertest/raw/master/image.png)
