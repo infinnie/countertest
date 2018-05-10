@@ -57,7 +57,7 @@ gulp.task("build", ["build:define", "build:main", "build:counter"], function () 
                 console.log(x);
                 var y = x.replace(file.base, "").replace(/[\\/]/g, "\\/").replace(/\./g, "\\.");
                 console.log(fileLookUp[x]);
-                fileContent = fileContent.replace(new RegExp("\"\\/" + y + "\""), fileLookUp[x].replace(/^.*?\\([^\\]+)$/, "\"/" + destPath + "/$1\""));
+                fileContent = fileContent.replace(new RegExp("%" + y), fileLookUp[x].replace(/^.*?\\([^\\]+)$/, "/" + destPath + "/$1"));
             });
             file._contents = Buffer.from(fileContent);
             callback(null, file);
