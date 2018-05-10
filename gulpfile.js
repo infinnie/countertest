@@ -9,14 +9,14 @@ gulp.task("thing", function () {
 gulp.task("build:main", ["thing"], function () {
     return gulp.src(["lib/h.js", "lib/app.js", "build/main.js"])
         .pipe(concat("main-dist.js"))
-        .pipe(uglify())
+        .pipe(uglify({ ie8: true }))
         .pipe(gulp.dest("build/dist/"));
 });
 
 gulp.task("build:counter", ["thing"], function () {
     return gulp.src(["js/counterfunctions.js", "js/connect.js", "build/counter.js"])
         .pipe(concat("counter-dist.js"))
-        .pipe(uglify())
+        .pipe(uglify({ ie8: true }))
         .pipe(gulp.dest("build/dist/"));
 });
 
