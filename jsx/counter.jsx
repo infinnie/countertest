@@ -17,9 +17,19 @@ define("build/counter", [
             // do something
             var value = obj.value, down = obj.down, up = obj.up;
             return (<p>
-                <button class="btn counterBtn" type="button" $click={down(name, by) }>&minus;</button>
+                <button class="btn counterBtn" type="button" $click={function () {
+                        down(name, by);
+                        return false;
+                    } }>
+                    &minus;
+                </button>
                 <span class="counterValue">{value}</span>
-                <button class="btn counterBtn" type="button" $click={up(name, by) }>+</button>
+                <button class="btn counterBtn" type="button" $click={function () {
+                        up(name, by);
+                        return false;
+                    }}>
+                    +
+                </button>
             </p>);
             }
         }/>);
