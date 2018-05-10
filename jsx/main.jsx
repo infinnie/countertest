@@ -1,4 +1,5 @@
 define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
+    "use strict";
     var loadCounter = function (injectView) {
         define.requirePromise(["build/counter"]).then(function (arr) {
             var Counter = arr[0];
@@ -30,7 +31,7 @@ define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
             </p>);
         }
     }, {
-        inject: function (arr) {
+        inject: function (arr) { // reserved for connect()
             var stateGetter = arr[0], callback = arr[1];
             return function (state, actions) {
                 return {

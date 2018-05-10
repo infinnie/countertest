@@ -1,5 +1,6 @@
 ﻿/// <reference path="/index.html"/>
 define("js/connect", ["jquery"], function ($) {
+    "use strict";
     return function (stateGetter, mutators, ops) {
         ops = ops || {};
         return function (obj) {
