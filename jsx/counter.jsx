@@ -10,7 +10,7 @@ define("build/counter", [
             by = props.by,
             Connector = connect({
                 value: function (state) {
-                    return state.pageData[name]
+                    return state.pageData[name];
                 }
             }, counterFunctions);
         return (<Connector render={function (obj) {

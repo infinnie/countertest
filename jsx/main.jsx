@@ -24,21 +24,23 @@ define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
             return (<p>
                 <button type="button" class="btn" $click={function () {
                     loadCounter(actions.globalInject);
-                }}>Show counters</button>
+                }}>
+                    Show counters
+                </button>
             </p>);
         }
     }, {
-            inject: function (x) {
-                return function (state, actions) {
-                    return { pageData: $.extend({}, state.pageData, x) };
-                };
-            }, globalInject: function (x) {
-                return function () {
-                    return x;
-                };
-            }
-        }, function (state) {
-            return state.currentView && state.currentView.apply(null, arguments);
-        }, $("#app").get(0)
+        inject: function (x) {
+            return function (state, actions) {
+                return { pageData: $.extend({}, state.pageData, x) };
+            };
+        }, globalInject: function (x) {
+            return function () {
+                return x;
+            };
+        }
+    }, function (state) {
+        return state.currentView && state.currentView.apply(null, arguments);
+    }, $("#app").get(0)
     );
 });
