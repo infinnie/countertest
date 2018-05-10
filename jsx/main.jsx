@@ -30,9 +30,12 @@ define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
             </p>);
         }
     }, {
-        inject: function (x) {
+        inject: function (arr) {
+            var stateGetter = arr[0], callback = arr[1];
             return function (state, actions) {
-                return { pageData: $.extend({}, state.pageData, x) };
+                return {
+                    pageData: $.extend({}, state.pageData, callback(stateGetter(state)))
+                };
             };
         }, globalInject: function (x) {
             return function () {
