@@ -13,7 +13,7 @@ define("js/connect", ["jquery"], function ($) {
                             // return val.apply(null, [boundState, actions.inject].concat(args));
                             actions.inject([stateGetter, val.apply(null, args)]);
                         };
-                    })
+                    });
                     $.map(ops, function (val, key) {
                         /// <param name="val" type="Function"/>
                         bound[key] = function () {

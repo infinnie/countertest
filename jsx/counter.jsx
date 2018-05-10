@@ -11,7 +11,7 @@ define("build/counter", [
             by = props.by;
         return (<Connector render={function (obj) {
             // do something
-            var value = obj.values[name], down = obj.down, up = obj.up;
+            var value = obj.values[name], down = obj.delayedDown, up = obj.up;
             return (<p>
                 <button class="btn counterBtn" type="button" $click={function () {
                         down(name, by);

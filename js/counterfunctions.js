@@ -24,7 +24,7 @@ define("js/counterfunctions", function () {
             up: function (boundState, mutators) {
                 var args = [].slice.call(arguments, 2);
                 return mutators.up.apply(null, args);
-            }, down: function (boundState, mutators) {
+            }, delayedDown: function (boundState, mutators) {
                 var args = [].slice.call(arguments, 2);
                 setTimeout(function () {
                     mutators.down.apply(null, args);
