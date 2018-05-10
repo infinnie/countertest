@@ -6,6 +6,10 @@ gulp.task("thing", function () {
     return gulp.src("jsx/**/*.jsx").pipe(babel()).pipe(gulp.dest("build"));
 });
 
+gulp.task("build:define", function () {
+    return gulp.src("define.js").pipe(uglify({ ie8: true })).pipe(gulp.dest("build/dist"));
+});
+
 gulp.task("build:main", ["thing"], function () {
     return gulp.src(["lib/h.js", "lib/app.js", "build/main.js"])
         .pipe(concat("main-dist.js"))
@@ -20,4 +24,4 @@ gulp.task("build:counter", ["thing"], function () {
         .pipe(gulp.dest("build/dist/"));
 });
 
-gulp.task("build", ["build:main", "build:counter"]);
+gulp.task("build", ["build:define", "build:main", "build:counter"]);
