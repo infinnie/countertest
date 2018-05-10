@@ -1,3 +1,4 @@
+/// <reference path="/node_modules/jquery/dist/jquery.js"/>
 //! (c) All rights reserved
 
 var define = (function ($) {

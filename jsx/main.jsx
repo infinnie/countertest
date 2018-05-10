@@ -6,13 +6,13 @@ define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
                 pageData: {
                     first: 0,
                     second: 0
-                }, currentView: function (state, actions) {
+                }, currentView: function () {
                     return (<div>
                         <h1>Counters</h1>
                         <p>First</p>
-                        <Counter name="first" by={1} inject={actions.inject} pageData={state.pageData} />
+                        <Counter name="first" by={1} />
                         <p>Second</p>
-                        <Counter name="second" by={1} inject={actions.inject} pageData={state.pageData} />
+                        <Counter name="second" by={1} />
                     </div>);
                 }
             });
