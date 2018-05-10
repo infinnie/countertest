@@ -21,13 +21,11 @@ define("js/counterfunctions", function () {
                 };
             }
         }, operations: {
-            up: function (boundState, mutators) {
-                var args = [].slice.call(arguments, 2);
-                return mutators.up.apply(null, args);
-            }, delayedDown: function (boundState, mutators) {
-                var args = [].slice.call(arguments, 2);
+            up: function (boundState, mutators, name, by) {
+                return mutators.up(name, by);
+            }, delayedDown: function (boundState, mutators, name, by) {
                 setTimeout(function () {
-                    mutators.down.apply(null, args);
+                    mutators.down(name, by);
                 }, 2333);
             }
         }
