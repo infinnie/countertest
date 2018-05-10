@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -9,6 +9,9 @@
         <div id="app" class="counterArea"></div>
         <script src="/node_modules/jquery/dist/jquery.min.js"></script>
         <script src="/define.js"></script>
-        <script src="/build/main.js"></script>
+        <script>
+            define.mapModule("build/counter", "/build/dist/counter-dist.js");
+        </script>
+        <script src="/build/dist/main-dist.js"></script>
     </body>
 </html>

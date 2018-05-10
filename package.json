@@ -1,14 +1,18 @@
 {
-    "dependencies": {
-        "jquery": "1.12.4"
-    },
+  "dependencies": {
+    "jquery": "1.12.4"
+  },
   "devDependencies": {
     "gulp": "3.9.1",
     "gulp-babel": "7.0.1",
     "babel-core": "6.26.0",
-    "babel-plugin-transform-react-jsx": "6.24.1"
+    "babel-plugin-transform-react-jsx": "6.24.1",
+    "gulp-rename": "1.2.2",
+    "gulp-concat": "2.6.1",
+    "gulp-uglify": "3.0.0"
   },
   "scripts": {
-    "gulp": "gulp thing"
+    "gulp": "gulp thing",
+    "build": "gulp build"
   }
 }
