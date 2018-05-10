@@ -10,7 +10,6 @@ define("js/connect", ["jquery"], function ($) {
                     $.map(mutators, function (val, key) {
                         boundMutators[key] = function () {
                             var args = [].slice.call(arguments, 0);
-                            // return val.apply(null, [boundState, actions.inject].concat(args));
                             actions.inject([stateGetter, val.apply(null, args)]);
                         };
                     });
