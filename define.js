@@ -8,6 +8,7 @@ var define = (function ($) {
         rootPath = "/",
         nameMap = {},
         tempList = {},
+        currentAnonymous = null,
         resolveDep = function (key) {
             var url;
             if (typeof key === "function") {
@@ -70,7 +71,10 @@ var define = (function ($) {
             return define(name, [], deps);
         }
         if ($.isArray(name) || $.isFunction(name)) {
-            throw new Error("Not implemented.");
+            if (!currentAnonymous) {
+                throw new Error("Not implemented.");
+            }
+            return define(currentAnonymous, name, deps);
         }
         var arr = /((.*?\/)(?:[^/]+\/)?)?[^/]+$/.exec(name),
             path = arr[1], parentPath = arr[2];
@@ -150,6 +154,9 @@ var define = (function ($) {
         /// <param name="obj" type="Object"/>
         if ("root" in obj) {
             rootPath = obj.root;
+        }
+        if ("anonymous" in obj) {
+            currentAnonymous = obj.anonymous;
         }
     };
 
