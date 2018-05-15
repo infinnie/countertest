@@ -1,8 +1,7 @@
-define("build/main", ["jquery", "lib/h", "lib/app"], function ($, h, app) {
+define("build/main", ["jquery", "lib/h", "lib/app", "import"], function ($, h, app, f) {
     "use strict";
     var loadCounter = function (injectView) {
-        define.requirePromise(["build/counter"]).then(function (arr) {
-            var Counter = arr[0];
+        f("./counter").then(function (Counter) {
             injectView({
                 pageData: {
                     first: 0,

@@ -77,16 +77,7 @@ var define = (function ($) {
             return define(currentAnonymous, name, deps);
         }
         var arr = /((.*?\/)(?:[^/]+\/)?)?[^/]+$/.exec(name),
-            path = arr[1], parentPath = arr[2];
-
-        // TODO
-        if ((typeof path === "string") && path) {
-            deps = $.map(deps, function (dep) {
-                return dep.replace(/^\.\//, path);
-            });
-        }
-        if ((typeof parentPath === "string") && parentPath) {
-            deps = $.map(deps, function (dep) {
+            path = arr[1], parentPath = arr[2], getDepPath = function (dep) {
                 /// <param name="dep" type="String"/>
                 var hasParent = /((?:\.\.\/)*?)\.\.\/(?=[^.]|$)/, cur;
                 if (hasParent.test(dep)) {
@@ -97,34 +88,56 @@ var define = (function ($) {
                             return $1;
                         });
                     }
-                    return cur.join("/") + "/" + dep;
+                    return cur.concat(dep).join("/");
                 }
                 return dep;
+            };
+
+        // TODO
+        if ((typeof path === "string") && path) {
+            deps = $.map(deps, function (dep) {
+                return dep.replace(/^\.\//, path);
             });
+        }
+        if ((typeof parentPath === "string") && parentPath) {
+            deps = $.map(deps, getDepPath);
         }
         // do something
         if ((name in storage) || (name in tempList)) {
             return;
         }
         tempList[name] = $.when.apply($, $.map($.map(deps, function (dep) {
-            if ("require" !== dep) {
-                return dep;
-            }
-            return function (x) {
-                if (/Array/.test(Object.prototype.toString.call(x))) {
-                    return define.require.apply(define, arguments);
-                }
+            var internalGetDepPath = function (x) {
+                /// <param name="x" type="String"/>
                 if ((typeof path === "string") && path) {
                     x = x.replace(/^\.\//, path);
                 }
                 if ((typeof parentPath === "string") && parentPath) {
-                    x = x.replace(/^\.\.\//, parentPath);
+                    x = getDepPath(x);
                 }
-                if (x in storage) {
-                    return storage[x];
-                }
-                throw new Error("Module not found :(");
-            };
+                return x;
+            }
+            if ("require" === dep) {
+                return function (x) {
+                    /// <param name="x" type="String"/>
+                    if (/Array/.test(Object.prototype.toString.call(x))) {
+                        return define.require.apply(define, arguments);
+                    }
+                    x = internalGetDepPath(x);
+                    if (x in storage) {
+                        return storage[x];
+                    }
+                    throw new Error("Module not found :(");
+                };
+            }
+            if ("import" === dep) {
+                return function (x) {
+                    return define.requirePromise([internalGetDepPath(x)]).then(function (arr) {
+                        return arr[0];
+                    });
+                };
+            }
+            return dep;
         }), resolveDep)).then(function () {
             delete tempList[name];
             delete pendingList[name];
