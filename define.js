@@ -116,7 +116,7 @@ var define = (function ($) {
                     x = getDepPath(x);
                 }
                 return x;
-            }
+            };
             if ("require" === dep) {
                 return function (x) {
                     /// <param name="x" type="String"/>
