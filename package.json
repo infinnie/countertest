@@ -1,17 +1,17 @@
 {
-  "dependencies": {
-    "jquery": "1.12.4"
-  },
-  "devDependencies": {
-    "gulp": "4.0.0",
-    "gulp-babel": "7.0.1",
-    "babel-core": "6.26.3",
-    "babel-plugin-transform-react-jsx": "6.24.1",
-    "gulp-concat": "2.6.1",
-    "gulp-uglify": "3.0.0"
-  },
-  "scripts": {
-    "gulp": "gulp thing",
-    "build": "gulp build"
-  }
+    "dependencies": {
+        "jquery": "1.12.4"
+    },
+    "devDependencies": {
+        "gulp": "4.0.0",
+        "gulp-babel": "7.0.1",
+        "babel-core": "6.26.3",
+        "babel-plugin-transform-react-jsx": "6.24.1",
+        "gulp-concat": "2.6.1",
+        "gulp-uglify": "3.0.0"
+    },
+    "scripts": {
+        "gulp": "gulp thing",
+        "build": "gulp build"
+    }
 }
