@@ -30,14 +30,9 @@ define("build/main", ["jquery", "lib/h", "lib/app", "import"], function ($, h, a
             </p>);
         }
     }, {
-        inject: function (arr) {
+        inject: function (callback) {
             /// <summary>reserved for connect()</summary>
-            var stateGetter = arr[0], callback = arr[1];
-            return function (state, actions) {
-                return {
-                    pageData: $.extend({}, state.pageData, callback(stateGetter(state)))
-                };
-            };
+            return callback;
         }, globalInject: function (x) {
             return function () {
                 return x;

@@ -1,21 +1,18 @@
-define("js/counterfunctions", function () {
+define("js/counterfunctions", ["jquery"], function ($) {
     "use strict";
     return {
-        stateGetter: function (state) {
-            return state.pageData;
-        },
         mutators: {
             up: function (name, by) {
-                return function (boundState) {
+                return function (stateSlice) {
                     var obj = {};
-                    obj[name] = boundState[name] + by;
-                    return obj;
+                    obj[name] = stateSlice[name] + by;
+                    return $.extend({}, stateSlice, obj);
                 };
             }, down: function (name, by) {
-                return function (boundState) {
+                return function (stateSlice) {
                     var obj = {};
-                    obj[name] = boundState[name] - by;
-                    return obj;
+                    obj[name] = stateSlice[name] - by;
+                    return $.extend({}, stateSlice, obj);
                 };
             }
         }, operations: {

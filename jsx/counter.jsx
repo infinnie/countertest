@@ -5,7 +5,8 @@ define("build/counter", [
     "js/connect"
 ], function ($, h, counterFunctions, connect) {
     "use strict";
-    var Connector = connect(counterFunctions.stateGetter, counterFunctions.mutators, counterFunctions.operations);
+    var Connector = connect("pageData")(
+        null, counterFunctions.mutators, counterFunctions.operations);
     return function (props) {
         var name = props.name,
             by = props.by;
