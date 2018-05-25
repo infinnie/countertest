@@ -9,14 +9,14 @@ define("build/counter", [
     return function (props) {
         var name = props.name,
             by = props.by;
-        return (<Connector render={function (obj) {
+        return (<Connector render={function (values, mutations, operations) {
             // do something
-            var value = obj.values[name], down = obj.delayedDown, up = obj.up;
+            var value = values[name], down = operations.delayedDown, up = mutations.up;
             return (<p>
                 <button class="btn counterBtn" type="button" $click={function () {
                         down(name, by);
                         return false;
-                    } }>
+                    }}>
                     &minus;
                 </button>
                 <span class="counterValue">{value}</span>

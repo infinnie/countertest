@@ -30,7 +30,8 @@ define("build/main", ["jquery", "lib/h", "lib/app", "import"], function ($, h, a
             </p>);
         }
     }, {
-        inject: function (arr) { // reserved for connect()
+        inject: function (arr) {
+            /// <summary>reserved for connect()</summary>
             var stateGetter = arr[0], callback = arr[1];
             return function (state, actions) {
                 return {
