@@ -1,14 +1,17 @@
 ﻿define("js/connect", ["jquery"], function ($) {
     "use strict";
-    var getPath = function (obj, path) {
+    var getPathArray = function (path) {
+        /// <summary>Turn an array or valid path string into another array.</summary>
+        /// <return type="Array"/>
+        if (typeof path === "string") {
+            return path.split(".");
+        }
+        return path.slice(0);
+    }, getPath = function (obj, path) {
         /// <summary>Get an object slice that matches the given path.</summary>
         /// <param name="obj" type="Object"/>
         /// <param name="path" type="Array"/>
-        if (typeof path === "string") {
-            path = path.split(".");
-        } else {
-            path = path.slice(0);
-        }
+        path = getPathArray(path);
         while (path.length) {
             obj = obj[path.shift()];
         }
@@ -17,11 +20,7 @@
         /// <summary>Immutably extend an original state</summary>
         /// <param name="origState" type="Object"/>
         /// <param name="path" type="Array"/>
-        if (typeof path === "string") {
-            path = path.split(".");
-        } else {
-            path = path.slice(0);
-        }
+        path = getPathArray(path);
         /// <var name="first">Path has been shifted when this is evaluated.</var>
         var first = path.shift(), objStack = [origState[first]], slicedPath = path.slice(0, -1), tempObj, ret = {};
         while (slicedPath.length) {
@@ -37,14 +36,14 @@
     };
     return function (path) {
         var hasPath = arguments.length > 0;
-        return function (stateGetter, mutations, ops) {
-            /// <param name="stateGetter">Get a presentation of the state slice to render.</param>
+        return function (stateSelector, mutations, ops) {
+            /// <param name="stateSelector" type="Function">Get a presentation of the state slice to render.</param>
             ops = ops || {};
             return function (props) {
                 return function (state, actions) {
                     var stateSlice = hasPath ? getPath(state, path) : state,
                         render = props && props.render,
-                        bound = stateGetter ? stateGetter(stateSlice) : stateSlice,
+                        bound = stateSelector ? stateSelector(stateSlice) : stateSlice,
                         boundMutations = {}, boundOperations = {};
                     if (render) {
                         $.map(mutations, function (val, key) {
@@ -55,9 +54,7 @@
                                 var f = val.apply(null, arguments);
                                 actions.inject(hasPath
                                     ? function (state) {
-                                        var ret = setPath(state, path, f(getPath(state, path)));
-                                        console.log(ret);
-                                        return ret;
+                                        return setPath(state, path, f(getPath(state, path)));
                                     } : f);
                             };
                         });
